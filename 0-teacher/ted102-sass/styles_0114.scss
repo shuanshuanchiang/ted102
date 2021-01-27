@@ -1,0 +1,301 @@
+//變數要先宣告
+@import 'sass/sassVar';
+
+//函式
+@import 'sass/mixins';
+
+// bootstrap 
+// @import 'node_modules/bootstrap-sass/assets/stylesheets/bootstrap' ;
+
+//boostrap 客製化
+
+
+
+
+
+//共用
+body {
+    margin: $zero;
+    padding: $zero;
+    font-size: $fontsize;
+    color: map-get($bg-color, 'red');
+    background-color: map-get($bg-color, 'green');
+}
+
+//header
+@import 'sass/layout-header';
+
+//內容
+.wrapper {
+    @include marginAuto(1200px);
+    background-color: rgb(232, 232, 232);
+}
+
+//footer
+@import 'sass/layout-footer';
+
+
+.rect {
+    @include marginAuto($w);
+}
+
+.app {
+    @include marginAuto(100%);
+}
+
+//預設值
+.box {
+    @include box(100px, 200px);
+    @include marginAuto(); //給null
+}
+
+.app2 {
+    @include rect(400px, 300px);
+    background-image: url('./image/..');
+}
+
+
+.red {
+    color: red
+}
+
+//佔位
+%red {
+    color: red
+}
+
+@mixin red() {
+    color: red;
+}
+
+.text {
+    font-size: 30px;
+    @extend %red;
+    // @include red();
+}
+
+
+//組件寫法
+.red {
+    background-color: rgb(255, 0, 0);
+}
+
+.green {
+    background-color: rgb(42, 125, 0);
+}
+
+.boxline {
+    @include rect(300px, 200px);
+}
+
+// 運算  單位要注意
+
+$wd : 10;
+$xs : 5;
+
+.boxer {
+    width: $wd + $xs + px;
+    height: 10 - 5 + px;
+    max-width: 100 * 5 + px;
+    font-size: (100 / 50) + px;
+    font: (100 / 20) + px;
+}
+
+
+//運算函示
+.operator1 {
+    width: floor(100/3) + px; //無條件捨去
+    height: round(100/6) + px; //四捨五入
+    max-width: ceil(100/7) + px; // 無條件進位
+}
+
+
+
+$fontBase : 18px;
+
+h1 {
+    font-size: round($fontBase * 4.2);
+}
+
+h2 {
+    font-size: round($fontBase * 3.8);
+}
+
+h3 {
+    font-size: round($fontBase * 2.6);
+}
+
+h4 {
+    font-size: round($fontBase * 1.8);
+}
+
+
+// $num : 1200;
+
+@mixin layout($num) {
+    @if $num==100 {
+        width: 100%;
+    }
+
+    @else {
+        width: $num + px;
+        @include marginAuto();
+    }
+}
+
+.wrapper-inner {
+    @include layout(1920);
+}
+
+
+@for $i from 1 through 10 {
+    .box-#{$i} {
+        width: $i * 1px;
+    }
+}
+
+@include grid(xs, 12);
+
+$list : a1 a2 a3 b1 b2 box01; //list 
+
+@each $a in $list {
+    .img_#{$a} {
+        background-image:url(./images/#{$a}.jpg);
+        width: 100%;
+    }
+}
+
+//
+@mixin imgUrl($img , $style:jpg) {
+    @each $a in $img {
+        .img_#{$a} {
+            background-image:url('./images/#{$a}.#{$style}');
+            @content; //content 
+        }
+    }
+}
+
+.slider01 {
+    width: 100%;
+    height: 100vh;
+
+    @include imgUrl(aa bb cc dd) {
+        background-repeat: no-repeat;
+        background-size: cover;
+        @include rect(100vw, 100vh);
+        position: absolute;
+    }
+}
+
+.slider02 {
+    @include imgUrl(rect cc , png) {
+        background-size: cover;
+        @include rect(400px);
+    }
+}
+
+
+.slider03 {
+    @include imgUrl(small_pic01 small_pic02 small_pic03 , svg) {
+        @include rect(50px);
+    }
+}
+
+
+
+$map :(h1 : 40px,
+    h2 : 30px,
+    h3 : 20px,
+    '.small' : 12px,
+    '.large' : 30px,
+    '.middle' : 24px);
+
+$color : ('red' : #f20,
+    'green' : green,
+    'pink' : #fa7ce7);
+
+
+
+$num :('a1' : 10px 20px 20px 10px,
+    'a2' : 0 auto,
+);
+
+
+@each $key,
+$val in $num {
+    .#{$key} {
+        margin: $val;
+    }
+}
+
+@each $key,
+$val in $map {
+    #{$key} {
+        font-size: $val;
+    }
+}
+
+@mixin colorbox($color) {
+
+    @each $key,
+    $val in $color {
+        .#{$key} {
+            background-color: $val;
+            @include rect(100vw, null);
+        }
+    }
+}
+
+@include colorbox($color);
+
+//按鈕組件
+
+$btn : (
+    'primary' : rgb(0, 136, 255),
+    'success' : rgb(43, 222, 115),
+    'error' : rgb(250, 9, 9),
+    'warning' : rgb(255, 255, 0),
+    'info' : rgb(255, 174, 0),
+    'black' : rgb(23, 23, 23)
+);
+
+.btn {
+    display: inline-block;
+    font-size: 14px;
+    vertical-align: middle;
+    padding: .325rem 1rem;
+    color: #fff;
+    border-radius: 5px;
+}
+
+
+@mixin btn-color($btn){
+  @each $key,$val in $btn {
+    .btn-#{$key} {
+        background-color: $val;
+        cursor: pointer;
+        border: 1px solid darken($val, 5%); //顏色函式 變暗
+        transition: all .3 ease;
+        &:hover {
+            background-color: darken($val, 25%);
+        }
+      @extend .btn;
+    }
+ }
+}
+@include btn-color($btn);
+
+
+@mixin push($num , $dir:left) {
+    @for $i from 1 through $num {
+        .push-#{$dir}_#{$i} {
+            margin-#{$dir} : $i * 1px;
+            @content;
+        }
+     }
+}
+
+@include push(1000) {
+   position: relative; 
+};
+@include push(100 , top);

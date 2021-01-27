@@ -1,0 +1,96 @@
+@import "node_modules/bourbon-neat/core/_neat";
+
+body{
+    margin: 0;
+    padding: 0;
+    color: #fff;
+}
+
+section{
+    width: 100vw;
+    height: 100vh;
+}
+
+.red{
+    background-color: gray;
+}
+
+.blue{
+    background-color: blue;
+}
+
+.h100{
+    height: 100vh;
+}
+
+
+//第一個場景
+.wrapper_12{ //在外層引入grid-container;
+    @include grid-container;
+    .grid_1{
+        @include grid-column(1);
+    }
+    .sidebar{
+        @include grid-column(2);
+        background: navy;
+    }
+    .main{
+        @include grid-column(6);
+    }
+
+    .menu{
+        @include grid-column(4);
+        background: olivedrab;
+    }
+}
+
+//第二個場景
+
+
+$grid-setting:(
+    columns: 4,
+    // color: rgba(#333,.2),
+    gutter: 10px, //中間的間距
+    // direction:rtl, //方向對調
+    media: "screen and (max-width: 999px)",
+
+);
+
+$grid-setting_medium:(
+    columns: 4,
+    gutter: 10px, //中間的間距
+    // direction:
+    media: "screen and (max-width: 900px)",
+
+);
+
+
+$grid-setting_small:(
+    columns: 4,
+    gutter: 0px, //中間的間距
+    // direction:
+    media: "screen and (max-width: 600px)",
+
+);
+
+.wrapper_grid{ 
+    margin-top: 20px;
+    @include grid-container;
+
+    .grid_3{
+        @include grid-column(1,$grid-setting);
+        //media query 平板
+        @include grid-media($grid-setting_medium){
+            @include grid-column(2);
+        }
+
+        //手機
+        @include grid-media($grid-setting_small){
+            @include grid-column(4);
+        }
+
+    }
+
+
+
+}

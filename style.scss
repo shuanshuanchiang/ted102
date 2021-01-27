@@ -1,0 +1,295 @@
+@import 'sass/sassVar'; //引入其他隻scss用的，也可以不寫後面的.scss跟前面的下底線
+@import 'sass/mixins';
+
+body{
+    margin: $margin;
+    padding: $null; //這樣代表padding被刪除了
+    font-size: $fontsize;
+    color : map-get( $bg-color , 'blue' ); //取map值的方式
+    background-color: rgb(208, 214, 214);
+    
+}
+
+.wrapper , .wrapper2{
+    h1{
+        font-size: $h1;
+        >span{
+            font-size: 12px;
+        }
+    }
+}
+
+nav{
+    ul{
+        list-style: decimal;
+        li{
+            display: inline-block;
+            width: 100px;
+            height: 40px;
+            text-align: center;
+            // color: map-get($bg-color , 'red' );
+            @extend %red;
+            &:nth-child(odd) {
+                background-color: #304df1; 
+             }
+            a{
+                color: map-get($bg-color , 'link' );
+                font-size: 30px;
+                text-decoration: none;
+                &:hover{
+                    color: map-get($bg-color , 'linkhover');
+                    @extend %red;
+                }
+
+            }
+        }
+    }
+}
+
+//也可以宣告變數
+//這是全域變數
+//sass的=就是用冒號:
+$w : 200px;
+
+// function
+@mixin marginAuto($w) {
+    margin: 0 auto;
+    width: $w;  //這是區域變數
+    background-color: #fff;  
+}
+
+// 呼叫function用法 
+.wrapper{
+    @include marginAuto($w);//這裡的$w是呼叫全域變數
+    background-color: rgb(232, 232, 232);
+}
+
+//預設值
+@mixin box($w:400px , $h: 300px){
+    width: $w;
+    height: $h;
+}
+.box {
+    @include box(100px , 200px);
+    // @include marginAuto();//給null
+}
+
+@mixin rect($w , $h:$w){
+    width: $w;
+    height: $h;
+    background-color: rgb(217, 250, 0);
+}
+
+.app2 {
+    @include rect(400px, 300px);
+    background-image: url('./image/..');
+}
+
+.red{
+    color: #7f0019;
+}
+
+%red{ //前面用％的時候，等於沒有這個class，只是有一個屬性
+    color: #7f0019;
+}
+
+@mixin red() {
+    color: red;
+}
+
+.box{
+    width: 200px;
+    height: 200px;
+    // @extend .red;//擴增屬性
+}
+
+
+@for $i from 1 through 10 {
+    .box-#{$i} {
+        width: $i * 1px;
+    }
+}
+
+//----------------- 0114 --------------------
+
+$list : a1 a2 a3 b1 b2 box01;  //list 
+
+@each $a in $list {
+    .img_#{$a} {
+       background-image:url(./images/#{$a}.jpg); 
+       width: 100%;
+    }
+}
+
+//
+@mixin imgUrl($img , $style:jpg){
+    @each $a in $img {
+        .img_#{$a} {
+           background-image:url('./images/#{$a}.#{$style}');
+           @content; //content 
+        }
+    }
+} 
+
+.slider01 {
+    width: 100%;
+    height: 100vh;
+   @include imgUrl(aa bb cc dd){
+        background-repeat: no-repeat; 
+        background-size: cover;
+        @include rect(100vw , 100vh);
+        position: absolute;
+   }
+}
+
+.slider02 {
+    @include imgUrl(rect cc , png){
+      background-size: cover;
+      @include rect(400px);
+    }
+ }
+
+
+ .slider03 {
+    @include imgUrl(small_pic01 small_pic02 small_pic03 , svg){
+      @include rect(50px);
+    }
+ } 
+
+
+
+ $map :( //key,value 記得要用()
+    h1: 40px,
+    h2: 30px,
+    h3: 20px,
+    ".small" : 12px,
+    ".large" : 30px,
+    ".middle" : 24px,
+ );
+
+
+ $color :(
+     "red" : #7f0019,
+     "green" : green,
+
+ );
+
+
+ @each $key,$val in $map { 
+     #{$key} {
+         font-size: $val;
+     }
+
+ }
+
+ @each $key,$val in $color { 
+    .#{$key} {  //這邊有代表class的. 或是直接將.加在$color =>  ".red" : #7f0019,
+        color: $val;
+    }
+}
+
+@mixin colorbox($color) {
+    @each $key,$val in $color { 
+        .#{$key} {  
+            background-color: $val;
+            @include rect(100vw, null );
+        }
+    } 
+}
+
+@include colorbox($color);
+
+
+
+$desktop :1396px;
+$tablet : 721px;
+$mobile : 414px;
+
+
+
+@mixin rwd($breakpoint){
+//桌機
+@if $breakpoint == 'desktop' {
+    @media all and(min-width: $desktop){
+        @content;
+    }
+}
+//平板
+@else if $breakpoint == 'tablet' {
+    @media all and(min-width: $tablet){
+        @content;
+    }
+}
+// 手機
+@else if $breakpoint == 'mobile' {
+    @media all and(max-width: $mobile){
+        @content;
+    }
+ }
+}
+
+
+@include rwd(desktop){
+    body {
+        font-size: 160px;
+    }
+}
+
+@include rwd(tablet){
+    body {
+        font-size: 80px;
+    }
+}
+
+@include rwd(mobile){
+    body {
+        font-size: 60px;
+    }
+}
+
+//以上是用if else寫的
+//以下是用each寫法
+
+
+$rwd : (
+'desktop' : 1200px,
+'tablet'  : 721px,
+'mobile' : 320px
+);
+
+
+
+@mixin rwd-each($breakpoint) {
+    @each $b,$val in $rwd {
+        @if $breakpoint== $b {
+            @media all and(min-width: $val) {
+                @content;
+            }
+        }
+    }
+}
+
+@include rwd-each(desktop){
+   .wrapper {
+      width: 100%;
+   }
+}
+
+@include rwd-each(tablet){
+    .wrapper {
+       width: 95%;
+    }
+ }
+
+ @include rwd-each(mobile){
+    .wrapper {
+       width: 60%;
+    }
+ }
+
+
+
+
+
+
+

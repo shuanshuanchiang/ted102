@@ -1,0 +1,87 @@
+body {
+  margin: 0;
+  padding: 0;
+  color: #fff;
+}
+
+section {
+  width: 100vw;
+  height: 100vh;
+}
+
+.red {
+  background-color: gray;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.h100 {
+  height: 100vh;
+}
+
+.wrapper_12::after {
+  clear: both;
+  content: "";
+  display: block;
+}
+
+.wrapper_12 .grid_1 {
+  width: calc(8.33333% - 21.66667px);
+  float: left;
+  margin-left: 20px;
+}
+
+.wrapper_12 .sidebar {
+  width: calc(16.66667% - 23.33333px);
+  float: left;
+  margin-left: 20px;
+  background: navy;
+}
+
+.wrapper_12 .main {
+  width: calc(50% - 30px);
+  float: left;
+  margin-left: 20px;
+}
+
+.wrapper_12 .menu {
+  width: calc(33.33333% - 26.66667px);
+  float: left;
+  margin-left: 20px;
+  background: olivedrab;
+}
+
+.wrapper_grid {
+  margin-top: 20px;
+}
+
+.wrapper_grid::after {
+  clear: both;
+  content: "";
+  display: block;
+}
+
+.wrapper_grid .grid_3 {
+  width: calc(25% - 12.5px);
+  float: left;
+  margin-left: 10px;
+}
+
+@media screen and (max-width: 900px) {
+  .wrapper_grid .grid_3 {
+    width: calc(50% - 15px);
+    float: left;
+    margin-left: 10px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .wrapper_grid .grid_3 {
+    width: calc(100%);
+    float: left;
+    margin-left: 0px;
+  }
+}
+/*# sourceMappingURL=gridneat.css.map */

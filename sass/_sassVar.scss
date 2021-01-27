@@ -1,0 +1,19 @@
+//檔名加_ 就會不編譯css，只認這隻scss
+
+
+//scss註解
+/*css註解*/
+
+//變數宣告 
+$fontsize : 16px;//數值
+$red : #7f0019;//顏色
+$margin : 10px 50px;//list
+$h1 : 1.2rem;
+$null : null; //空值的話可以刪除屬性值，連屬性一起刪除
+$false : false;
+$bg-color :(
+    'red' : #f20,
+    'blue' : #2d5bf3,
+    'link' : #fff,
+    'linkhover' : #333
+);

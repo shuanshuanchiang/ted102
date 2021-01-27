@@ -1,0 +1,33 @@
+//js 函式
+// function name(){ }
+
+//mixin sass 函式
+// @include marginAuto(100%);
+
+@mixin marginAuto($w:null){
+    margin: 0 auto;
+    width: $w; //區域變數
+}
+
+
+// @include box(400px , 200px);
+@mixin box($w:400px , $h: 300px){
+    width: $w;
+    height: $h;
+}
+
+// @include rect(400px);
+@mixin rect($w , $h:$w){
+    width: $w;
+    height: $h;
+}
+
+// grid
+@mixin grid($name , $num) {
+    @for $i from 1 through $num {
+        .col-#{$name}-#{$i} {
+            width: ($i / $num) * 100%;
+            display: inline-block;
+        }
+    }
+}

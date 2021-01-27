@@ -1,0 +1,248 @@
+@charset "UTF-8";
+/* css註解*/
+body {
+  margin: 0px;
+  padding: 0px;
+  font-size: 20px;
+  color: #ff1616;
+  background-color: #d7ff67;
+}
+
+header {
+  margin: 0 auto;
+  width: 1200px;
+}
+
+header h1 {
+  font-size: 3.6rem;
+  display: inline-block;
+}
+
+header h1 span {
+  font-size: 10px;
+  color: #333;
+}
+
+header nav {
+  display: inline-block;
+}
+
+header nav ul {
+  list-style: none;
+}
+
+header nav ul li {
+  display: inline-block;
+  padding: 10px 30px;
+  background-color: #2fc1ff;
+  cursor: pointer;
+}
+
+header nav ul li:nth-child(odd) {
+  background-color: #ffba53;
+}
+
+header nav ul li a {
+  color: #333;
+  text-decoration: none;
+}
+
+header nav ul li a:hover {
+  color: #000;
+  font-weight: bold;
+}
+
+.wrapper {
+  margin: 0 auto;
+  width: 1200px;
+  background-color: #e8e8e8;
+}
+
+footer {
+  margin: 0 auto;
+  width: 100%;
+  background-color: #e4e4e4;
+}
+
+.rect {
+  margin: 0 auto;
+  width: 1200px;
+}
+
+.app {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.box {
+  width: 100px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.app2 {
+  width: 400px;
+  height: 300px;
+  background-image: url("./image/..");
+}
+
+.red {
+  color: red;
+}
+
+.text {
+  color: red;
+}
+
+.text {
+  font-size: 30px;
+}
+
+.red {
+  background-color: red;
+}
+
+.green {
+  background-color: #2a7d00;
+}
+
+.boxline {
+  width: 300px;
+  height: 200px;
+}
+
+.boxer {
+  width: 15px;
+  height: 5px;
+  max-width: 500px;
+  font-size: 2px;
+  font: 5px;
+}
+
+.operator1 {
+  width: 33px;
+  height: 17px;
+  max-width: 15px;
+}
+
+h1 {
+  font-size: 76px;
+}
+
+h2 {
+  font-size: 68px;
+}
+
+h3 {
+  font-size: 47px;
+}
+
+h4 {
+  font-size: 32px;
+}
+
+.wrapper-inner {
+  width: 1920px;
+  margin: 0 auto;
+}
+
+.box-1 {
+  width: 1px;
+}
+
+.box-2 {
+  width: 2px;
+}
+
+.box-3 {
+  width: 3px;
+}
+
+.box-4 {
+  width: 4px;
+}
+
+.box-5 {
+  width: 5px;
+}
+
+.box-6 {
+  width: 6px;
+}
+
+.box-7 {
+  width: 7px;
+}
+
+.box-8 {
+  width: 8px;
+}
+
+.box-9 {
+  width: 9px;
+}
+
+.box-10 {
+  width: 10px;
+}
+
+.col-xs-1 {
+  width: 8.33333%;
+  display: inline-block;
+}
+
+.col-xs-2 {
+  width: 16.66667%;
+  display: inline-block;
+}
+
+.col-xs-3 {
+  width: 25%;
+  display: inline-block;
+}
+
+.col-xs-4 {
+  width: 33.33333%;
+  display: inline-block;
+}
+
+.col-xs-5 {
+  width: 41.66667%;
+  display: inline-block;
+}
+
+.col-xs-6 {
+  width: 50%;
+  display: inline-block;
+}
+
+.col-xs-7 {
+  width: 58.33333%;
+  display: inline-block;
+}
+
+.col-xs-8 {
+  width: 66.66667%;
+  display: inline-block;
+}
+
+.col-xs-9 {
+  width: 75%;
+  display: inline-block;
+}
+
+.col-xs-10 {
+  width: 83.33333%;
+  display: inline-block;
+}
+
+.col-xs-11 {
+  width: 91.66667%;
+  display: inline-block;
+}
+
+.col-xs-12 {
+  width: 100%;
+  display: inline-block;
+}
+/*# sourceMappingURL=styles.css.map */
